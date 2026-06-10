@@ -2,8 +2,10 @@
 
 public partial class App : Application
 {
-    protected override Window CreateWindow(IActivationState? activationState)
+    public App()
     {
-        return new Window(new AppShell());
+        InitializeComponent();
+
+        MainPage = new AppShell();
     }
 }

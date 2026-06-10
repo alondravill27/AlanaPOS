@@ -5,10 +5,6 @@
              x:Class="AlanaPOS.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
 
             <Color x:Key="Primary">#993556</Color>
             <Color x:Key="PrimaryDark">#72243E</Color>
@@ -17,21 +13,18 @@
             <Color x:Key="OffBlack">#221B3D</Color>
             <Color x:Key="Black">#000000</Color>
             <Color x:Key="MidnightBlue">#72243E</Color>
-
             <Color x:Key="PinkPrimary">#993556</Color>
             <Color x:Key="PinkDark">#72243E</Color>
             <Color x:Key="PinkMid">#D4537E</Color>
             <Color x:Key="PinkLight">#F4C0D1</Color>
             <Color x:Key="PinkBg">#FDF2F6</Color>
             <Color x:Key="PinkSurface">#FBEAF0</Color>
-
             <Color x:Key="Success">#27500A</Color>
             <Color x:Key="SuccessBg">#EAF3DE</Color>
             <Color x:Key="Warning">#633806</Color>
             <Color x:Key="WarningBg">#FAEEDA</Color>
             <Color x:Key="Danger">#791F1F</Color>
             <Color x:Key="DangerBg">#FCEBEB</Color>
-
             <Color x:Key="White">#FFFFFF</Color>
             <Color x:Key="TextMuted">#888780</Color>
             <Color x:Key="Gray100">#F3F2F8</Color>
@@ -43,6 +36,11 @@
             <Color x:Key="Gray900">#221B3D</Color>
             <Color x:Key="Gray950">#120E24</Color>
             <Color x:Key="SecondaryDarkText">#E6E4F0</Color>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
     </Application.Resources>
