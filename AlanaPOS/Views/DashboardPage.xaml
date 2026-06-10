@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AlanaPOS.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AlanaPOS.ViewModels"
+    x:DataType="vm:DashboardViewModel"
+    Title="Dashboard"
+    BackgroundColor="{StaticResource PinkBg}">
+
+    <ContentPage.BindingContext>
+        <vm:DashboardViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- ENCABEZADO -->
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout>
+                    <Label Text="Dashboard"
+                           FontSize="22" FontAttributes="Bold"
+                           TextColor="{StaticResource PinkDark}"/>
+                    <Label Text="{Binding FechaHoy}"
+                           FontSize="13"
+                           TextColor="{StaticResource PinkPrimary}"/>
+                </VerticalStackLayout>
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding Periodos}"
+                        SelectedItem="{Binding PeriodoSeleccionado}"
+                        WidthRequest="120"
+                        TextColor="{StaticResource PinkDark}"/>
+            </Grid>
+
+            <!-- TARJETAS MÉTRICAS 2x2 -->
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="12" RowSpacing="12">
+
+                <!-- Ventas -->
+                <Border Grid.Row="0" Grid.Column="0"
+                        BackgroundColor="{StaticResource White}"
+                        StrokeThickness="0.5"
+                        Stroke="{StaticResource PinkLight}"
+                        Padding="14">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="💰 Ventas totales"
+                               FontSize="12"
+                               TextColor="{StaticResource PinkPrimary}"/>
+                        <Label Text="{Binding VentasTotales}"
+                               FontSize="22" FontAttributes="Bold"
+                               TextColor="{StaticResource PinkDark}"/>
+                        <Label Text="{Binding VentasTendencia}"
+                               FontSize="11"
+                               TextColor="{StaticResource PinkMid}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Transacciones -->
+                <Border Grid.Row="0" Grid.Column="1"
+                        BackgroundColor="{StaticResource White}"
+                        StrokeThickness="0.5"
+                        Stroke="{StaticResource PinkLight}"
+                        Padding="14">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="🧾 Transacciones"
+                               FontSize="12"
+                               TextColor="{StaticResource PinkPrimary}"/>
+                        <Label Text="{Binding TotalTransacciones}"
+                               FontSize="22" FontAttributes="Bold"
+                               TextColor="{StaticResource PinkDark}"/>
+                        <Label Text="{Binding TransTendencia}"
+                               FontSize="11"
+                               TextColor="{StaticResource PinkMid}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Clientes -->
+                <Border Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="{StaticResource White}"
+                        StrokeThickness="0.5"
+                        Stroke="{StaticResource PinkLight}"
+                        Padding="14">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="👥 Clientes activos"
+                               FontSize="12"
+                               TextColor="{StaticResource PinkPrimary}"/>
+                        <Label Text="{Binding ClientesActivos}"
+                               FontSize="22" FontAttributes="Bold"
+                               TextColor="{StaticResource PinkDark}"/>
+                        <Label Text="{Binding ClientesSub}"
+                               FontSize="11"
+                               TextColor="{StaticResource PinkMid}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Stock bajo -->
+                <Border Grid.Row="1" Grid.Column="1"
+                        BackgroundColor="{StaticResource DangerBg}"
+                        StrokeThickness="0.5"
+                        Stroke="{StaticResource Danger}"
+                        Padding="14">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="⚠️ Stock bajo"
+                               FontSize="12"
+                               TextColor="{StaticResource Danger}"/>
+                        <Label Text="{Binding ProductosStockBajo}"
+                               FontSize="22" FontAttributes="Bold"
+                               TextColor="{StaticResource Danger}"/>
+                        <Label Text="Requiere reorden"
+                               FontSize="11"
+                               TextColor="{StaticResource Danger}"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- TOP PRODUCTOS -->
+            <Border BackgroundColor="{StaticResource White}"
+                    StrokeThickness="0.5"
+                    Stroke="{StaticResource PinkLight}"
+                    Padding="14">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Top productos"
+                           FontSize="14" FontAttributes="Bold"
+                           TextColor="{StaticResource PinkDark}"/>
+                    <CollectionView ItemsSource="{Binding TopProductos}"
+                                    HeightRequest="180">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:TopProductoItem">
+                                <Grid ColumnDefinitions="*,Auto"
+                                      Padding="0,6">
+                                    <Label Text="{Binding Nombre}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource PinkDark}"/>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding TotalVentas, StringFormat='${0:N0}'}"
+                                           FontSize="13" FontAttributes="Bold"
+                                           TextColor="{StaticResource PinkMid}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
